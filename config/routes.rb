@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   # put '/artworks/:id', to: 'artworks#update'
   # delete '/artworks/:id', to: 'artworks#destroy'
 
-
+  resources :artwork_shares, only: %i(create destroy)
 
 
 end
