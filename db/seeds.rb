@@ -6,7 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(name: 'Mike', email: 'mike@turtles.com')
-User.create!(name: 'Leo', email: 'leo@turtles.com')
-User.create!(name: 'Don', email: 'don@turtles.com')
-User.create!(name: 'Rapheal', email: 'raph@turtles.com')
+User.create!(username: 'Mike')
+User.create!(username: 'Leo')
+User.create!(username: 'Don')
+User.create!(username: 'Rapheal')
+
+10.times do |i|
+  Artwork.create!(
+    title: "Artwork#{i}",
+    artist_id: ((i % 4) + 1),
+    image_url: "URL#{i}"
+  )
+end
+
+20.times do |i|
+  ArtworkShare.create!(
+    artwork_id: ((i % 10) + 1),
+    viewer_id: ((i % 4) + 1)
+  )
+end
