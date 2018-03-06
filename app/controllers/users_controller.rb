@@ -10,8 +10,8 @@ class UsersController < ApplicationController
   end
 
   def create
-  user = User.new(params[:user].permit(:name, :email))
-  # replace the `user_attributes_here` with the actual attribute keys
+    user = User.new(params_permit)
+    # replace the `user_attributes_here` with the actual attribute keys
     if user.save
       render json: user
     else
@@ -20,8 +20,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.destroy(params[:id])
-    render action: :index
+    user = User.destroy(params[:id])
+    render json: User.destroy(params[:id])
+
   end
 
   def update
@@ -31,7 +32,9 @@ class UsersController < ApplicationController
     render json: user
   end
 
+  private
+
   def params_permit
-    params[:user].permit(:name, :email)
+    params.require(:user).permit(:username)
   end
 end
