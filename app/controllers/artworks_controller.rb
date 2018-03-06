@@ -4,7 +4,7 @@ class ArtworksController < ApplicationController
   end
 
   def show
-    render json: Artwork.find(params[id])
+    render json: Artwork.find(params[:id])
   end
 
   def create
@@ -18,9 +18,13 @@ class ArtworksController < ApplicationController
 
   def update
     artwork = Artwork.find(params[:id])
-    artwork.update(params_permit)
-    render json: artwork
+    if artwork
+      artwork.update(params_permit)
+    else
+      render json: ["Maybe try creating it first"], status: 418
+    end
   end
+
 
   def destroy
     render json: Artwork.destroy(params[:id])

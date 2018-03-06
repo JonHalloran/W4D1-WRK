@@ -19,17 +19,23 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    user = User.destroy(params[:id])
-    render json: User.destroy(params[:id])
-
-  end
-
   def update
     user = User.find(params[:id])
+    if user
+      user.update(params_permit)
+    else
+      render json: ["Imaginary people are in your head not my database"], status: 418
+    end
+  end
 
-    user.update(params_permit)
-    render json: user
+  def destroy
+    user = User.find(params[:id])
+    if user
+      user.destroy
+      render json: user
+    else
+      render json: ["User not found "], status: 404
+    end
   end
 
   private
