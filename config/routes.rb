@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # resources :users
+  resources :users do
+    resources :artworks, only: [:index]
+  end
 
   get '/users/', to: 'users#index'
   post '/users/', to: 'users#create'
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
   # delete '/artworks/:id', to: 'artworks#destroy'
 
   resources :artwork_shares, only: %i(create destroy)
+
 
 
 end

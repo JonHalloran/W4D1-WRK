@@ -1,6 +1,9 @@
 class ArtworksController < ApplicationController
   def index
-    render json: Artwork.all
+    id = params[:user_id]
+    p id
+    # ar1 = Artwork.where("artist_id = #{id}")
+    render json: Artwork.distinct.joins(:artwork_shares).where("viewer_id = #{id} OR artist_id = #{id}")
   end
 
   def show
